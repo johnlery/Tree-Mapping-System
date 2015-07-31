@@ -1,0 +1,1009 @@
+<?php
+
+  include 'db_con.php';
+
+include 'session.php';
+
+if(!isset($_SESSION['login_user'])){
+header("location: index.php");
+}
+
+
+
+ $user = $_SESSION['login_user'];
+//saving the encoded vertices of a polygon
+  
+  if (isset($_POST["vertix"])&& $_POST['vertix']!=null) {
+    $vertices = $_POST["vertix"];
+    $color = $_POST["color"];
+
+    $query = "SELECT tbl_poly.vertices FROM tbl_poly INNER JOIN tbl_trees ON tbl_poly.tree_id = tbl_trees.tree_id 
+      WHERE tbl_poly.vertices = '$vertices'";
+
+    $result = mysql_query($query);
+    if(!$result){
+      die("Something went wrong!").mysql_error();
+    }
+    $num = mysql_num_rows($result);
+
+    if($num > 0){
+      ?> 
+        <script type="text/javascript">
+            alert("Polygon is already existing!");
+        </script>
+      <?php
+    }
+    else{
+
+    $sth = mysql_query("SELECT * FROM tbl_trees");
+
+        if(!$sth){echo "error";}
+
+        for($i = 0; $i < mysql_num_rows($sth); $i++)
+        {
+          if(mysql_result($sth, $i, "color") == $color){
+            $num = mysql_result($sth, $i, "tree_id");
+          }
+        }
+
+    $query = mysql_query("INSERT INTO `tbl_poly` (vertices,tree_id) VALUES ('$vertices','$num')");
+
+    if(!$query){
+
+      //echo $vertices;
+      echo $color;
+      echo $vertices;
+      echo $num;
+      die("You have an error in your sql statement:: ").mysql_error();
+    }
+    else{
+      ?>
+        <script type="text/javascript">
+        alert("Success!");
+        </script>
+      <?php
+    }
+
+}
+
+  }
+
+  else{
+
+      // $query = mysql_query("SELECT vertices FROM tbl_poly");
+      // if (mysql_num_rows($query)!=0) {
+      //   for ($i=0; $i < mysql_num_rows($query) ; $i++) { 
+      //     $vert[i] = $i["vertices"];
+      //     echo $vert[$i];
+      //   }
+      // }
+
+  }
+
+if(isset($_GET['deletePoly']))
+{
+  $poly_id = $_GET['deletePoly'];
+
+  $query = "DELETE FROM tbl_poly WHERE poly_id = '$poly_id'";
+  $result = mysql_query($query);
+  if(!$result){
+    die("You have an error in your sql statement:: ").mysql_error();
+  }
+  else{
+    ?>
+        <script>
+            alert("Successfully Deleted!");
+        </script>
+    <?php
+  } 
+}
+if(isset($_POST['updatePoly'])&&isset($_POST['vertixUpdate'])){
+  $poly_id = $_POST['updatePoly'];
+  $poly_vertix = $_POST['vertixUpdate'];
+  $query = "UPDATE tbl_poly SET vertices = '$poly_vertix' WHERE poly_id = '$poly_id' ";
+  $result = mysql_query($query);
+  if(!$result){
+    die("Something went wrong!").mysql_error();
+  }
+  else{
+    ?>
+    <script>
+        alert("Successfully Updated!");
+    </script>
+    <?php
+  }
+}
+?>
+<!DOCTYPE html>
+<html>
+   <head>
+    <meta charset="UTF-8">
+    <title>Design Tree Mapping</title>
+
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+   <!-- BEGIN GLOBAL MANDATORY STYLES -->          
+   <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+   <!-- END GLOBAL MANDATORY STYLES -->
+   <!-- BEGIN PAGE LEVEL PLUGIN STYLES --> 
+   <!-- BEGIN THEME STYLES --> 
+   <link href="assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/css/plugins.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+   <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
+    <!-- Theme style -->
+    <link href="dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+   <link rel="shortcut icon" href="favicon.ico" />
+   <!-- END THEME STYLES -->
+    
+       <style type="text/css">
+       html, body {
+        padding: 0;
+        margin: 0;
+        height: 97.5%;
+      }
+      #map{
+        width: 68%;
+        height: 92%;
+        float: left;
+        margin-left: 3px;
+        border: dotted 5px white;
+      }
+      .right{
+        float: right;
+        width: 14.8%;
+      }
+      #panel {
+        width: 225px;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        float: left;
+      }
+     /* #color-palette {
+        border: solid 2px white;
+        padding: 0px 10px 10px 10px;
+      }
+      #color-palette h4{
+        color: black;
+      }
+*/
+      .color-button {
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        margin: 2px;
+        float: left;
+        cursor: pointer;
+      }
+      input{
+        width: 100%;
+      }
+
+      #delete-button {
+        margin-top: 5px;
+      }
+      .styled-select select {
+   
+   width: 100%;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 34px;
+   }
+
+   #directionsPanel td,#directionsPanel span{
+      background-color: white;
+   }
+   #directionsPanel{
+    height: 360px;
+    overflow-y: scroll;
+   }
+        .controls {
+        margin-top: 16px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #pac-input {
+        background-color: #fff;
+        padding: 0 11px 0 13px;
+        width: 400px;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        text-overflow: ellipsis;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+        margin-left: -1px;
+        padding-left: 14px;  /* Regular padding-left + 1. */
+        width: 401px;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+    </style>
+  </head>
+  <body class="skin-green">
+      
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="admin.php" class="logo"><b>Bohol</b>TCS</a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>-->
+                  <span class="hidden-xs"><?php echo $user; ?></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <p>
+                      <?php echo $user; ?>
+                      <small>Member since Nov. 2012</small>
+                    </p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Left side column. contains the logo and sidebar -->
+
+      <!-- BEGIN CONTAINER -->
+
+      <div id="panel">
+        <!-- <div class="user-panel">
+            <div class="pull-left image">
+              <img src="dist/img/user2.png" class="img-circle" alt="User Image" />
+            </div>
+            <div class="pull-left info">
+              <p>Bohol Tree</p>
+              <p>Classification System</p> -->
+             <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
+           <!--  </div>
+          </div> -->
+          <div class="portlet box">
+            <div class="portlet-title">
+              <div class="caption"><i class="icon-edit"></i>View</div>
+                 <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="javascript:;" class="reload"></a>
+                 </div>
+              </div>
+            <div class="portlet-body">
+              <div class="styled-select">
+                <label>Map type view:</label>
+                <select id="mapType" onchange="initialize()">
+                  <option  value="SATELLITE">Satellite</option>
+                  <option value="ROADMAP">Roadmap</option>
+                  <option selected value="TERRAIN">Terrain</option>
+                  <option value="HYBRID">Hybrid</option>
+                </select>
+                <label>Filter by:</label>
+                <form method="GET" action="edit_map.php" role="form">
+                  <select id="filterSelect" name="filter">
+                  </select><br/><br/>
+                  <button type="submit" class="btn btn-info">Filter</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="portlet box">
+            <div class="portlet-title">
+              <div class="caption"><i class="icon-edit"></i> ManagePolygon</div>
+                 <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="javascript:;" class="reload"></a>
+                 </div>
+              </div>
+            <div class="portlet-body">
+              <form method="GET" action="edit_map.php" role="form" onsubmit="return validate()">
+                <input type="text" id="deletePoly" name="deletePoly" hidden  />
+                <button type="submit" onclick="deleteSelectedShape()" id="delete-button">Delete Selected Shape</button>
+              </form>
+            <br/>
+              <form method="POST" action="edit_map.php" role="form" onsubmit="return validate()">
+                <textarea id="vertix" name="vertixUpdate" hidden></textarea>
+                <input type="text" id="updatePoly" name="updatePoly" hidden />
+                <button type="submit" onclick="updateSelectedShape()" id="update-button">Update Selected Shape</button>
+              </form>
+            <br/>
+            <div class="styled-select">
+              <label>Select Color:</label>
+              <select id="colorSelect"></select>
+            </div>
+            <br/>
+            <form method="POST" action="edit_map.php" name="savePoly" onsubmit="return validate()">
+            <textarea id="vertix2" name="vertix" hidden></textarea>
+            <textarea id="vertices" style="height:100px; width:100%;" placeholder="Vertices Location" required></textarea>
+            <input type="text" name="color" id="color" placeholder="Color" required/>
+            <textarea id="description" name="description" placeholder="Description" required></textarea>
+            <input type="submit" value="Save"/>
+          </form>
+            </div>
+          </div>
+
+      </div>
+
+  <div id="map"></div>
+
+  <div class="right">
+         <div class="portlet box">
+              <div class="portlet-title">
+                <div class="caption"><i class="icon-edit"></i>Directions</div>
+                   <div class="tools">
+                      <a href="javascript:;" class="collapse"></a>
+                      <a href="javascript:;" class="reload"></a>
+                   </div>
+                </div>
+              <div class="portlet-body">
+              <label>Origin:</label>
+                    <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location" style="width:100%;" required>
+<!--     <div id="type-selector" class="controls">
+      <input type="radio" name="type" id="changetype-all" checked="checked">
+      <label for="changetype-all">All</label>
+
+      <input type="radio" name="type" id="changetype-establishment">
+      <label for="changetype-establishment">Establishments</label>
+
+      <input type="radio" name="type" id="changetype-address">
+      <label for="changetype-address">Addresses</label>
+
+      <input type="radio" name="type" id="changetype-geocode">
+      <label for="changetype-geocode">Geocodes</label>
+    </div> --><br/>
+              <label>Destination:</label>
+        <input type="text" name="markerEndLat" id="markerEndLat" placeholder="Latitude" readonly />
+        <input type="text" name="markerEndLong" id="markerEndLong" placeholder="Longitude" readonly />
+        <button onclick="calcRoute();">Get Direction</button>
+
+                <br/>
+        <div id="warnings_panel" style="width:100%;height:10%;text-align:center"></div>
+        <div id="directionsPanel"></div> 
+            </div>
+          </div>
+      </div><!-- /.content-wrapper -->
+      
+
+       <!-- end portlet for directions panel -->
+   <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+   <!-- BEGIN CORE PLUGINS -->   
+   <!--[if lt IE 9]>
+   <script src="assets/plugins/respond.min.js"></script>
+   <script src="assets/plugins/excanvas.min.js"></script> 
+   <![endif]-->   
+   <script src="http://maps.google.com/maps/api/js?sensor=true&libraries=drawing,geometry,places&v=3.exp&signed_in=true"></script>
+    <script type="text/javascript" src="js/ajaxrequest.js"></script>
+       <script>
+       function validate(){
+        //var poly = document.forms["savePoly"]["vertix"].value;
+        var poly = document.getElementById("vertices").value;
+        var update = document.getElementById("vertix").value;
+        var deletePoly = document.getElementById("deletePoly").value;
+        //alert(poly);
+        if(poly == null || poly ==""||update == null||update==""){
+          alert("Polygon must be clicked!");
+          return false;
+        }
+        else{
+
+          return true;
+        }
+
+
+       }
+   <?php
+  
+
+        $sth = mysql_query("SELECT * FROM tbl_trees");
+
+        if(!$sth){echo "error";}
+
+        $rows = array();
+        $tree_names = array();
+
+        for($i = 0; $i < mysql_num_rows($sth); $i++)
+        {
+          $rows[] = mysql_result($sth, $i, "color");
+          $tree_names[]=mysql_result($sth, $i, "tree_name");
+        }
+        
+        // while($r = mysql_result($sth, "color") {
+        //     $rows[] = $r;
+        // }
+        $json_array = json_encode($rows);
+        $tree_array = json_encode($tree_names);
+    ?>
+
+      var drawingManager;
+      var selectedShape;
+      var colors = <?php echo $json_array; ?>;
+      var tree_names = <?php echo $tree_array; ?>;
+      var selectedColor;
+      var colorButtons = {};
+
+      function clearSelection() {
+        if (selectedShape) {
+          selectedShape.setEditable(false);
+          selectedShape = null;
+        }
+      }
+
+      function setSelection(shape) {
+        clearSelection();
+        selectedShape = shape;
+        shape.setEditable(true);
+        selectColor(shape.get('fillColor') || shape.get('strokeColor'));
+  }
+
+function checkPoly(selectedShape){
+
+  var encode = google.maps.geometry.encoding.encodePath(selectedShape.getPath()).replace(/\\/g,"\\\\");
+         // alert(encode);
+          <?php 
+              $query = "SELECT * FROM tbl_poly";
+              $result = mysql_query($query);
+              if(!$result){
+                die("Something went wrong!").mysql_error();
+              }
+              $num = mysql_num_rows($result);
+              for ($i=0; $i < $num ; $i++) { 
+                ?>
+                  if(encode == "<?php echo mysql_result($result, $i, 'vertices'); ?>"){
+                    //alert("<?php echo mysql_result($result, $i, 'poly_id'); ?>");
+                    // <?php
+                    //   $poly_id = mysql_result($result, $i, 'poly_id');
+                    //   //break;
+                    // ?> 
+                    return "<?php echo mysql_result($result, $i, 'poly_id'); ?>";
+                  }
+                <?php
+              }
+              
+          ?>
+
+}
+      function deleteSelectedShape() {
+        if (selectedShape) {
+          var poly_id = checkPoly(selectedShape);
+          alert(poly_id);
+          selectedShape.setMap(null);
+          var deletePoly = document.getElementById("deletePoly");
+          deletePoly.value = poly_id;
+        }
+      }
+
+      function selectColor(color) {
+        selectedColor = color;
+        for (var i = 0; i < colors.length; ++i) {
+          var currColor = colors[i];
+          colorButtons[currColor].style.border = currColor == color ? '2px solid #789' : '2px solid #fff';
+        }
+
+        // Retrieves the current options from the drawing manager and replaces the
+        // stroke or fill color as appropriate.
+
+        var polygonOptions = drawingManager.get('polygonOptions');
+        polygonOptions.fillColor = color;
+        drawingManager.set('polygonOptions', polygonOptions);
+      }
+
+      function setSelectedShapeColor(color) {
+        if (selectedShape) {
+          if (selectedShape.type == google.maps.drawing.OverlayType.POLYLINE) {
+            selectedShape.set('strokeColor', color);
+          } else {
+            selectedShape.set('fillColor', color);
+          }
+        }
+      }
+
+      function makeColorButton(color,tree) {
+        var button = document.createElement('option');
+        var colorSelect = document.getElementById('colorSelect'),
+            filterSelect = document.getElementById('filterSelect');
+
+        button.className = 'color-button';
+        button.style.backgroundColor = color;
+        button.innerHTML = tree;
+        google.maps.event.addDomListener(button, 'click', function() {
+          selectColor(color);
+          setSelectedShapeColor(color);
+        });
+
+        google.maps.event.addDomListener(colorSelect,'change',function(){
+            var val = colorSelect.options[colorSelect.selectedIndex].value;
+            selectColor(val);
+            setSelectedShapeColor(val);
+            colorSelect.style.backgroundColor = val;
+           });
+        google.maps.event.addDomListener(filterSelect,'change',function(){
+            var val = colorSelect.options[filterSelect.selectedIndex].value;
+            //selectColor(val);
+            //setSelectedShapeColor(val);
+            filterSelect.style.backgroundColor = val;
+           });
+
+
+        return button;
+      }
+
+       function buildColorPalette() {
+         var colorPalette = document.getElementById('color-palette');
+         var colorSelect = document.getElementById('colorSelect'),
+            filterSelect = document.getElementById('filterSelect');
+         for (var i = 0; i < colors.length; ++i) {
+           var currColor = colors[i];
+           var currTree = tree_names[i];
+           var colorButton = makeColorButton(currColor,currTree);
+           
+           colorSelect.options[colorSelect.options.length] = new Option(currTree,currColor);
+           filterSelect.options[filterSelect.options.length] = new Option(currTree,currTree);
+
+           colorSelect.options[i].setAttribute("id",currColor);
+
+           filterSelect.options[i].setAttribute("id",currTree);
+
+           var setOptionStyle = document.getElementById(currColor),
+                filterOptionStyle = document.getElementById(currTree);
+
+           setOptionStyle.style.backgroundColor = currColor;
+           filterOptionStyle.style.backgroundColor = currColor;
+
+           colorSelect.style.backgroundColor = colors[0];
+           filterSelect.style.backgroundColor = colors[0];
+           //colorSelect.appendChild(colorButton);
+           colorButtons[currColor] = colorButton;
+         }
+         selectColor(colors[0]);
+
+         filterSelect.options[filterSelect.options.length] = new Option("All","All");
+         
+        
+       }
+
+       function getAttribs(thiss){
+
+          //alert(thiss.id);
+              var vertices = thiss.getPath();
+              var encodePath = google.maps.geometry.encoding.encodePath(vertices).replace(/\\/g,"\\\\");
+
+              var polyColor = thiss.get('fillColor');
+
+              //alert(polyColor);
+                var decodePath = google.maps.geometry.encoding.decodePath(encodePath);
+
+               var doc = document.getElementById("vertix");
+               doc.value = encodePath;
+               var doc = document.getElementById("vertix2");
+               doc.value = encodePath;
+               var doc = document.getElementById("deletePoly");
+               doc.value = encodePath;
+               var doc = document.getElementById("vertices");
+               doc.value = decodePath;
+               var doc = document.getElementById("color");
+               doc.value = polyColor;
+
+       }
+
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var stepDisplay;
+var markerArray = [];
+
+      function initialize(){
+
+
+        //Selecting map type
+        var mapType = document.getElementById("mapType").value,
+            type;
+
+        if(mapType == "ROADMAP"){
+          type = google.maps.MapTypeId.ROADMAP;
+        }
+        else if(mapType == "SATELLITE"){
+          type = google.maps.MapTypeId.SATELLITE;
+        }
+        else if(mapType == "HYBRID"){
+          type = google.maps.MapTypeId.HYBRID;
+        }
+        else{
+          type = google.maps.MapTypeId.TERRAIN;
+        }
+        //alert(mapType);
+
+        var mapOption = {
+          zoom: 10,
+          center: new google.maps.LatLng(9.796605699999999,124.2421597),
+          mapTypeId: type,
+          disableDefaultUI: false,
+          zoomControl: true
+        };
+        var map = new google.maps.Map(document.getElementById('map'),
+      mapOption);
+        var polyOptions = {
+          strokeWeight: 0,
+          fillOpacity: 0.8,
+          editable: true
+        };
+
+        var rendererOptions = {
+              map: map
+      }
+        directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+        stepDisplay = new google.maps.InfoWindow();
+
+  var input = /** @type {HTMLInputElement} */(
+      document.getElementById('pac-input'));
+
+  // var types = document.getElementById('type-selector');
+  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.bindTo('bounds', map);
+
+  var infowindow = new google.maps.InfoWindow();
+  var marker = new google.maps.Marker({
+    map: map,
+    anchorPoint: new google.maps.Point(0, -29)
+  });
+
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      return;
+    }
+
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+      //map.fitBounds(place.geometry.viewport);
+    } else {
+      //map.setCenter(place.geometry.location);
+      //map.setZoom(17);  // Why 17? Because it looks good.
+    }
+    marker.setIcon(/** @type {google.maps.Icon} */({
+      url: place.icon,
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(35, 35)
+    }));
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+
+    var address = '';
+    if (place.address_components) {
+      address = [
+        (place.address_components[0] && place.address_components[0].short_name || ''),
+        (place.address_components[1] && place.address_components[1].short_name || ''),
+        (place.address_components[2] && place.address_components[2].short_name || '')
+      ].join(' ');
+    }
+
+    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+    infowindow.open(map, marker);
+  });
+
+  // Sets a listener on a radio button to change the filter type on Places
+  // Autocomplete.
+  // function setupClickListener(id, types) {
+  //   var radioButton = document.getElementById(id);
+  //   google.maps.event.addDomListener(radioButton, 'click', function() {
+  //     autocomplete.setTypes(types);
+  //   });
+  // }
+
+  // setupClickListener('changetype-all', []);
+  // setupClickListener('changetype-address', ['address']);
+  // setupClickListener('changetype-establishment', ['establishment']);
+  // setupClickListener('changetype-geocode', ['geocode']);
+
+        // Creates a drawing manager attached to the map that allows the user to draw
+        // markers, lines, and shapes.
+        drawingManager = new google.maps.drawing.DrawingManager({
+         // drawingMode: google.maps.drawing.OverlayType.POLYGON,
+          drawingControlOptions: {
+          position: google.maps.ControlPosition.TOP_CENTER,
+          drawingModes: [
+            google.maps.drawing.OverlayType.MARKER,
+            google.maps.drawing.OverlayType.POLYGON,
+          ]
+        },
+          markerOptions: {
+            draggable: true,
+            clickable: true
+          },
+          polygonOptions: polyOptions,
+          map: map
+        });
+        google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
+            var newShape = e.overlay;
+            newShape.type = e.type;
+
+            if (e.type != google.maps.drawing.OverlayType.MARKER) {
+            // Switch back to non-drawing mode after drawing a shape.
+            drawingManager.setDrawingMode(null);
+              alert("Done");
+               CreateCourseRegionPoly(newShape);
+            // Add an event listener that selects the newly-drawn shape when the user
+            // mouses down on it.
+            
+
+            google.maps.event.addListener(newShape, 'click', function() {
+
+              // Get coordinate of the vertices of a polygon
+
+              getAttribs(this);
+              setSelection(newShape);
+            });
+            setSelection(newShape);
+          }
+          else{
+            if(newShape.type=='marker'){
+              
+
+              google.maps.event.addListener(newShape,'click',function(){
+                
+                var lat2 = newShape.getPosition().lat(),
+                    longi2 = newShape.getPosition().lng();
+
+                var foo = document.getElementById("markerEndLat");
+                foo.value = lat2;
+                foo = document.getElementById("markerEndLong");
+                foo.value = longi2;
+
+                newShape.setMap(null);
+              })
+            }
+          }
+        });
+
+        //Printing of polygon saved in the database
+        <?php
+
+          if(isset($_GET['filter'])&& ($_GET['filter'] != "All"))
+          {
+            $tree_name = $_GET['filter'];
+            $query = "SELECT tree_id FROM tbl_trees WHERE tree_name = '$tree_name'";
+            $result = mysql_query($query);
+            if(!$result){
+              die("Something went wrong!").mysql_error();
+            }
+            $tree_id = mysql_result($result, 0);
+
+            $query = "SELECT * FROM tbl_poly WHERE tree_id = '$tree_id'";
+          }
+          else{
+            $query = "SELECT * FROM tbl_poly";
+          }
+          
+          $result = mysql_query($query);
+          if (!$result) {
+            echo "ERROR";
+          }
+          $num = mysql_num_rows($result);
+
+          for($i = 0; $i < $num; $i++){
+          ?> 
+         var decoded_path = google.maps.geometry.encoding.decodePath("<?php echo mysql_result($result,$i,"vertices");?>");
+          <?php
+              $tree_id = mysql_result($result,$i, "tree_id");
+              $poly_id = mysql_result($result,$i,"poly_id");
+              $query = "SELECT * FROM tbl_trees WHERE tree_id='$tree_id'";
+              $results = mysql_query($query);
+              if (!$results) {
+                echo "ERROR";
+              }
+          ?>
+          var colorPoly = "<?php echo mysql_result($results, 0, 'color');?>";
+          
+        // Construct the polygon.
+          var drawPoly = new google.maps.Polygon({
+            id: <?php echo $poly_id ?>,
+            paths: decoded_path,
+            strokeColor: colorPoly,
+            strokeOpacity: 0.8,
+            strokeWeight: 0,
+            fillColor: colorPoly,
+            fillOpacity: 0.8
+          });
+         drawPoly.setMap(map);
+
+         google.maps.event.addListener(drawPoly, 'click', function() {
+              getAttribs(this);
+              setSelection(this);
+              var doc = document.getElementById("updatePoly");
+              doc.value = this.id;           
+        }); 
+
+        <?php
+        }
+        ?>
+       
+        // Clear the current selection when the drawing mode is changed, or when the
+        // map is clicked.
+        google.maps.event.addListener(drawingManager, 'drawingmode_changed', clearSelection);
+        google.maps.event.addListener(map, 'click', clearSelection);
+        // google.maps.event.addDomListener(document.getElementById('delete-button'), 'click', deleteSelectedShape);
+        directionsDisplay.setMap(map);
+        directionsDisplay.setPanel(document.getElementById("directionsPanel"));
+        
+        buildColorPalette();
+
+        calcRoute();
+
+    }
+
+    function calcRoute(){
+        // First, remove any existing markers from the map.
+      //   alert(markerArray.length);
+      // for (var i = 0; i < markerArray.length; i++) {
+      //   markerArray[i].setMap(null);
+      // }
+
+      // Now, clear the array itself.
+      markerArray = [];
+    
+    var lat2 = document.getElementById("markerEndLat").value,
+        longi2 = document.getElementById("markerEndLong").value;
+    var start = document.getElementById("pac-input").value;
+    
+    var end = new google.maps.LatLng(parseFloat(lat2),parseFloat(longi2));
+    //alert(start+" "+end);
+    var request = {
+        origin:start,
+        destination:end,
+        travelMode: google.maps.TravelMode.DRIVING,
+        provideRouteAlternatives: true,
+        durationInTraffic: true
+    };
+    directionsService.route(request, function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        //routePath = result.routes[0].overview_path;
+        //alert(routePath.lenth);
+      var warnings = document.getElementById("warnings_panel");
+      warnings.innerHTML += "" + response.routes[0].warnings + "";
+      directionsDisplay.setDirections(response);
+      showSteps(response);
+      }
+    });
+
+  }
+function showSteps(directionResult) {
+  // For each step, place a marker, and add the text to the marker's
+  // info window. Also attach the marker to an array so we
+  // can keep track of it and remove it when calculating new
+  // routes.
+  var myRoute = directionResult.routes[0].legs[0];
+  //var map= Ext.getCmp('map').getMap(); 
+  // var mapOption = {
+  //         zoom: 10,
+  //         center: new google.maps.LatLng(9.796605699999999,124.2421597),
+  //         // mapTypeId: type,
+  //         disableDefaultUI: false,
+  //         zoomControl: true
+  //       };
+  //       var map = new google.maps.Map(document.getElementById('map'),
+  //     mapOption);
+  alert(myRoute.steps.length);
+  for (var i = 0; i < myRoute.steps.length; i++) {
+    var marker = new google.maps.Marker({
+      position: myRoute.steps[i].start_location,
+      map: map
+    });
+    attachInstructionText(marker, myRoute.steps[i].instructions);
+    markerArray[i] = marker;
+  }
+}
+
+function attachInstructionText(marker, text) {
+  google.maps.event.addListener(marker, 'click', function() {
+    // Open an info window when the marker is clicked on,
+    // containing the text of the step.
+    stepDisplay.setContent(text);
+    stepDisplay.open(map, marker);
+  });
+}
+function CreateCourseRegionPoly(poly){
+var polypath= poly.getPath();
+var encodeString = google.maps.geometry.encoding.encodePath(polypath); 
+alert(encodeString);
+   $.ajax({
+      url: 'addPoly.php',
+      type: 'POST',
+      //contentType: 'application/json',
+      cache: false,
+      dataType: 'json',          
+      data: '{"CourseID":"'+ courseID +'","PolygonPath":"'+encodeURIComponent(encodeString)+'"}',
+      error: function (jqXHR, textStatus, errorThrown) {
+        alert("Messaging failed: " + errorThrown);
+      },
+       success: function (data) {
+       //d oyour sucess bit here...
+       }
+    });
+}
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+   <script src="assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+   <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>   
+   <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+   <script src="assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+   <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+   <script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
+   <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+   <script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
+   <script src="assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
+   <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
+   <!-- END CORE PLUGINS -->
+   <!-- BEGIN PAGE LEVEL PLUGINS -->
+   <!-- BEGIN PAGE LEVEL SCRIPTS -->
+   <script src="assets/scripts/app.js" type="text/javascript"></script>
+   <script src="assets/scripts/tasks.js" type="text/javascript"></script>        
+   <!-- END PAGE LEVEL SCRIPTS -->  
+    <!-- END CORE PLUGINS -->
+   <!-- BEGIN PAGE LEVEL PLUGINS -->
+   <script type="text/javascript" src="assets/plugins/select2/select2.min.js"></script>
+   <script type="text/javascript" src="assets/plugins/data-tables/jquery.dataTables.js"></script>
+   <script type="text/javascript" src="assets/plugins/data-tables/DT_bootstrap.js"></script>
+   <!-- END PAGE LEVEL PLUGINS -->
+   <!-- BEGIN PAGE LEVEL SCRIPTS -->
+   <script src="assets/scripts/table-editable.js"></script> 
+
+    <script>
+      jQuery(document).ready(function() {    
+         App.init(); // initlayout and core plugins
+
+         TableEditable.init();
+      });
+   </script>
+  </body>
+</html>

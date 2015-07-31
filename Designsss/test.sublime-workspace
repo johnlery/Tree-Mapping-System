@@ -1,0 +1,947 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"s",
+				"sister-in-law"
+			],
+			[
+				"br",
+				"brother-in-law"
+			],
+			[
+				"da",
+				"daughter-in-law"
+			],
+			[
+				"so",
+				"son-in-law"
+			],
+			[
+				"ap",
+				"Apo"
+			],
+			[
+				"ma",
+				"Mama"
+			],
+			[
+				"pa",
+				"Papa_niya"
+			],
+			[
+				"w",
+				"wife"
+			],
+			[
+				"p",
+				"Papa"
+			],
+			[
+				"lo",
+				"Lola"
+			],
+			[
+				"si",
+				"Siya"
+			],
+			[
+				"a",
+				"Ako"
+			],
+			[
+				"te",
+				"teofila"
+			],
+			[
+				"x",
+				"X"
+			],
+			[
+				"b",
+				"B"
+			],
+			[
+				"gra",
+				"grandfather"
+			],
+			[
+				"img",
+				"img	Tag"
+			],
+			[
+				"text",
+				"text-transform"
+			],
+			[
+				"sec",
+				"section	Tag"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"bo",
+				"border-radius"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"f",
+				"font-family"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"li",
+				"link	Tag"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"fonts",
+				"font-size"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"el",
+				"el"
+			],
+			[
+				"do",
+				"document"
+			],
+			[
+				"get",
+				"getElementByID"
+			],
+			[
+				"mv",
+				"moveBox"
+			],
+			[
+				"st",
+				"style	Tag"
+			],
+			[
+				"date",
+				"date_in"
+			],
+			[
+				"check",
+				"check"
+			],
+			[
+				"che",
+				"check"
+			],
+			[
+				"bord",
+				"border-radius"
+			],
+			[
+				"service",
+				"service"
+			],
+			[
+				"ser",
+				"service_rate"
+			],
+			[
+				"roo",
+				"room_no"
+			],
+			[
+				"ro",
+				"roomID"
+			],
+			[
+				"excess",
+				"excessrate"
+			],
+			[
+				"tot",
+				"totalperson"
+			],
+			[
+				"damage",
+				"damage_rate"
+			],
+			[
+				"bed",
+				"bed_ratetotal"
+			],
+			[
+				"book",
+				"bookingstatusID"
+			],
+			[
+				"boo",
+				"bookingstatusID"
+			],
+			[
+				"no",
+				"no_bed"
+			],
+			[
+				"cas",
+				"cash_in"
+			],
+			[
+				"add",
+				"additional_rate"
+			],
+			[
+				"booki",
+				"bookingID"
+			],
+			[
+				"type",
+				"type_service"
+			],
+			[
+				"on",
+				"onclick	Attr"
+			],
+			[
+				"roomtype",
+				"roomtypeID"
+			],
+			[
+				"room",
+				"roomtype"
+			],
+			[
+				"tb_",
+				"tb_booking"
+			],
+			[
+				"tb",
+				"tb_roomtype"
+			],
+			[
+				"ph",
+				"php"
+			],
+			[
+				"id",
+				"id"
+			],
+			[
+				"quer",
+				"query"
+			],
+			[
+				"ex",
+				"excessrate"
+			],
+			[
+				"mys",
+				"mysql_error"
+			],
+			[
+				"serv",
+				"service_no"
+			],
+			[
+				"delete",
+				"delete"
+			],
+			[
+				"rom",
+				"roomdoorNo"
+			],
+			[
+				"passw",
+				"password"
+			],
+			[
+				"pas",
+				"password"
+			],
+			[
+				"pass",
+				"pass"
+			],
+			[
+				"confirm",
+				"confirmpass"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"msyq",
+				"mysql_error"
+			],
+			[
+				"fo",
+				"font"
+			],
+			[
+				"time",
+				"timediff"
+			],
+			[
+				"date_",
+				"date_out"
+			],
+			[
+				"booking",
+				"bookingstatusID"
+			],
+			[
+				"tb_ro",
+				"tb_room"
+			],
+			[
+				"SE",
+				"SELECT"
+			],
+			[
+				"op",
+				"option"
+			],
+			[
+				"rooms",
+				"roomstatusID"
+			],
+			[
+				"my",
+				"mysql_error"
+			],
+			[
+				"r",
+				"row"
+			],
+			[
+				"roomt",
+				"room_type"
+			],
+			[
+				"els",
+				"else"
+			],
+			[
+				"joi",
+				"JOIN"
+			],
+			[
+				"roomsta",
+				"room_status"
+			],
+			[
+				"roomST",
+				"room_status"
+			],
+			[
+				"mysql_num",
+				"mysql_num_rows"
+			],
+			[
+				"tb_roo",
+				"tb_roomtype"
+			],
+			[
+				"mi",
+				"min-height"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"oo",
+				"optgroup	Tag"
+			],
+			[
+				"border-r",
+				"border-right-style"
+			],
+			[
+				"d",
+				"double"
+			],
+			[
+				"po",
+				"position"
+			],
+			[
+				"background",
+				"background-position"
+			],
+			[
+				"im",
+				"images"
+			],
+			[
+				"B",
+				"background"
+			],
+			[
+				"con",
+				"contact"
+			],
+			[
+				"la",
+				"last_name"
+			],
+			[
+				"fir",
+				"first_name"
+			],
+			[
+				"ge",
+				"getElementById"
+			],
+			[
+				"j",
+				"javascript"
+			],
+			[
+				"num",
+				"num1"
+			],
+			[
+				"rows",
+				"rows2"
+			],
+			[
+				"res",
+				"result_2"
+			],
+			[
+				"exe",
+				"execute"
+			],
+			[
+				"c",
+				"customer_no"
+			],
+			[
+				"IN",
+				"INTO"
+			],
+			[
+				"n",
+				"n"
+			],
+			[
+				"mysql_s",
+				"mysql_insert_id"
+			],
+			[
+				"ac",
+				"action	Attr"
+			],
+			[
+				"mysql_n",
+				"mysql_num_rows"
+			],
+			[
+				"u",
+				"username"
+			],
+			[
+				"ec",
+				"echo	echo \"…\""
+			],
+			[
+				"into",
+				"INTO"
+			],
+			[
+				"inse",
+				"INSERT"
+			],
+			[
+				"room_",
+				"room_no"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"exist",
+				"is_exist"
+			],
+			[
+				"na",
+				"nationality"
+			],
+			[
+				"bor",
+				"border-style"
+			],
+			[
+				"de",
+				"date2_default"
+			],
+			[
+				"dat",
+				"date_to"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"null",
+				"is_null"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "db_con.php",
+			"settings":
+			{
+				"buffer_size": 434,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test.html",
+			"settings":
+			{
+				"buffer_size": 12114,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/project/hotel_sys/db_con.php",
+		"/D/Design Tree Mapping/db_con.php",
+		"/D/project/hotel_sys/checklog.php",
+		"/D/project/hotel_sys/login.php",
+		"/D/project/hotel_sys/head.php",
+		"/C/Scheduling System/help/products.html",
+		"/C/Scheduling System/help/index.html",
+		"/D/philnits files/misaeltest.html",
+		"/C/Scheduling System/help/about.html",
+		"/C/Users/Betrayed/Documents/Prolog/familytree.pl",
+		"/F/Prolog_files/index.php",
+		"/C/Scheduling System/help/css/custom.css",
+		"/D/9-30-14/Automated Scheduling System/product-single.html",
+		"/D/9-30-14/Automated Scheduling System/assets/css/custom.css",
+		"/D/9-30-14/Automated Scheduling System/products.html",
+		"/D/9-30-14/Automated Scheduling System/about.html",
+		"/D/9-30-14/Automated Scheduling System/index.html",
+		"/D/TUTORIALS_OJT/BOOTSTRAP/Bootstrap3Ess-SF/Bootstrap3Ess/lesson13.html",
+		"/D/TUTORIALS_OJT/BOOTSTRAP/THEMES/themeko.org_metronic_1.5.2/metronic_1.5.2/admin/template_content/extra_profile.html",
+		"/D/TUTORIALS_OJT/BOOTSTRAP/THEMES/taurus/component_gallery.html",
+		"/D/9-30-14/Automated Scheduling System/assets/css/style.css",
+		"/D/9-30-14/Automated Scheduling System/help.html",
+		"/D/TUTORIALS_OJT/BOOTSTRAP/THEMES/themeko.org_metronic_1.5.2/metronic_1.5.2/admin/template_content_rtl/demo/username_checker.php",
+		"/D/a.html",
+		"/C/xampp/htdocs/hotel_sys_2/admin/reserve.php",
+		"/C/xampp/htdocs/hotel_sys_2/admin/checkin.php",
+		"/C/xampp/htdocs/hotel_sys_2/admin/edit.php",
+		"/C/xampp/htdocs/Cliffside2/ADMINISTRATOR/users.php",
+		"/C/xampp/htdocs/Cliffside2/ADMINISTRATOR/welcome.php",
+		"/F/ojt/index.html",
+		"/D/program.js",
+		"/D/TUTORIALS_OJT/WEB/Canvas_Materials/canvas_lesson_2.html",
+		"/D/lol.html",
+		"/D/lol1.js",
+		"/F/ /javascripts/jquery-2.1.0.js",
+		"/C/xampp/htdocs/hotel_sys/admin/login.php",
+		"/C/xampp/htdocs/hotel_sys/admin/style.css",
+		"/C/xampp/htdocs/hotel_sys/admin/updatetype.php",
+		"/C/xampp/htdocs/EditableInvoice/index.php",
+		"/C/xampp/htdocs/hotel_sys/admin/style2.css",
+		"/C/xampp/htdocs/hotel_sys/admin/edit.php",
+		"/C/xampp/htdocs/hotel_sys/admin/addroom.php",
+		"/C/xampp/htdocs/hotel_sys/admin/validate.js",
+		"/C/xampp/htdocs/hotel_sys/admin/checked.php",
+		"/C/xampp/htdocs/hotel_sys/admin/checke.php",
+		"/C/xampp/htdocs/hotel_sys/admin/reservation.php",
+		"/C/xampp/htdocs/hotel_sys/admin/checkin.php",
+		"/C/xampp/htdocs/hotel_sys/admin/mainform.php",
+		"/C/xampp/htdocs/hotel_sys/admin/reserved.php",
+		"/C/xampp/htdocs/hotel_sys/admin/statement.php",
+		"/C/xampp/htdocs/hotel_sys/admin/bills.php",
+		"/C/xampp/htdocs/hotel_sys/admin/restore.php",
+		"/C/xampp/htdocs/hotel_sys/admin/showadmin.php",
+		"/C/xampp/htdocs/hotel_sys/admin/menu.php",
+		"/C/xampp/htdocs/hotel_sys/admin/addtype.php",
+		"/C/xampp/htdocs/hotel_sys/admin/showroomtype.php",
+		"/C/xampp/htdocs/hotel_sys/admin/showroom.php",
+		"/C/xampp/htdocs/hotel_sys/admin/archived.php",
+		"/C/xampp/htdocs/hotel_sys/admin/billing.php",
+		"/C/xampp/htdocs/hotel_sys/admin/billing1.php",
+		"/C/xampp/htdocs/hotel_sys/admin/reserve.php",
+		"/C/xampp/htdocs/hotel_sys/admin/edited.php",
+		"/C/xampp/htdocs/hotel_sys/admin/serviceupdate.php",
+		"/C/xampp/htdocs/hotel_sys/admin/service.php",
+		"/C/xampp/htdocs/hotel_sys/admin/addservice.php",
+		"/C/xampp/htdocs/hotel_sys/admin/getroom.php",
+		"/C/xampp/htdocs/hotel_sys/guest/services.html",
+		"/C/xampp/htdocs/hotel_sys/guest/restaurant.html",
+		"/C/xampp/htdocs/hotel_sys/guest/header.php",
+		"/C/xampp/htdocs/hotel_sys/guest/gallery.html",
+		"/C/xampp/htdocs/hotel_sys/guest/booking.html",
+		"/C/xampp/htdocs/hotel_sys/guest/ie_png.js",
+		"/C/xampp/htdocs/hotel_sys/guest/ie_style.css",
+		"/C/xampp/htdocs/hotel_sys/guest/all-free-download.com.url",
+		"/C/xampp/htdocs/hotel_sys/admin/calendar.css",
+		"/C/xampp/htdocs/hotel_sys/admin/calendar.js",
+		"/C/xampp/htdocs/hotel_sys/admin/calendar_form.js",
+		"/C/xampp/htdocs/hotel_sys/admin/calendar_form.php",
+		"/C/xampp/htdocs/hotel_sys/admin/cancel.php",
+		"/C/xampp/htdocs/hotel_sys/admin/change_log.txt",
+		"/C/xampp/htdocs/hotel_sys/admin/checklog.php",
+		"/C/xampp/htdocs/hotel_sys/admin/checkout.php",
+		"/C/xampp/htdocs/hotel_sys/admin/chekk.php",
+		"/C/xampp/htdocs/hotel_sys/admin/db_con.php",
+		"/C/xampp/htdocs/hotel_sys/admin/db_hotel_sys.sql",
+		"/C/xampp/htdocs/hotel_sys/admin/delete.php",
+		"/C/xampp/htdocs/hotel_sys/admin/editroom.php",
+		"/C/xampp/htdocs/hotel_sys/admin/foot.php",
+		"/C/xampp/htdocs/hotel_sys/admin/index.php",
+		"/C/xampp/htdocs/hotel_sys/admin/lcsms.html",
+		"/C/xampp/htdocs/hotel_sys/admin/lcsms.php",
+		"/C/xampp/htdocs/hotel_sys/admin/outing.php",
+		"/C/xampp/htdocs/hotel_sys/admin/sample.php",
+		"/C/xampp/htdocs/hotel_sys/admin/secure.php",
+		"/C/xampp/htdocs/hotel_sys/admin/test_calendar_value.php",
+		"/C/xampp/htdocs/hotel_sys/admin/tc_calendar.php",
+		"/F/hotel_sys/admin/bills.php",
+		"/C/xampp/htdocs/hotel_sys/admin/head.php",
+		"/C/xampp/htdocs/hotel_sys/admin/print.php",
+		"/C/xampp/htdocs/hotel_sys/admin/AddAdmin.php",
+		"/C/xampp/htdocs/hotel_sys/admin/editadmin.php",
+		"/C/xampp/htdocs/hotel_sys/admin/addroomed.php",
+		"/C/xampp/htdocs/hotel_sys/admin/mains.php",
+		"/G/f/mainformbok.php",
+		"/G/f/reservation.php",
+		"/F/New folder/statement.php",
+		"/F/New folder/reserve.php",
+		"/F/New folder/checkout.php",
+		"/F/New folder/checke.php",
+		"/F/New folder/cancel.php",
+		"/F/New folder/restore.php",
+		"/F/New folder/bills.php",
+		"/C/xampp/htdocs/hotel_sys/admin/ddmenu/ddmenu.css",
+		"/C/xampp/htdocs/hotel_sys/admin/ddmenu/ddmenu.js",
+		"/C/xampp/htdocs/hotel_sys/admin/bills1.php",
+		"/F/admin/statement 1.php",
+		"/F/admin/bills 1.php",
+		"/C/xampp/htdocs/hotel_sys/admin/billingg.php",
+		"/F/admin/billing 1.php",
+		"/F/admin/reserve 1.php",
+		"/C/Users/Betrayed/Downloads/ddmenu/ddmenu/ddmenu.html",
+		"/C/xampp/htdocs/hotel_sys/admin/admin.php",
+		"/C/xampp/htdocs/hotel_sys/mainformbok.php",
+		"/C/Users/Betrayed/Downloads/hotel system/EditableInvoice/EditableInvoice/index.php",
+		"/C/xampp/htdocs/Gie_Gardens/GUEST/bootstrap/bootstrap-dropdown.js",
+		"/C/xampp/htdocs/Gie_Gardens/lcsms.php",
+		"/C/xampp/htdocs/hotel_sys/reservation.php",
+		"/C/xampp/htdocs/Gie_Gardens/ADMINISTRATOR/gen_report.php"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"elijah",
+			"parent",
+			"container",
+			".\n",
+			"p",
+			"img",
+			"important",
+			"tab_1_3",
+			"body",
+			"tab_1_3",
+			"tabs",
+			"com",
+			"image",
+			"round",
+			"h3",
+			"h2",
+			"class",
+			"src",
+			"h1",
+			"PAID",
+			"echo",
+			"</form>",
+			"ann",
+			"result2",
+			"inner",
+			"left",
+			"inner join",
+			"roomdoorNo",
+			"roomdoor",
+			"()\">",
+			"tr",
+			"over",
+			"displa",
+			"hidden",
+			"rb",
+			"r",
+			"rb",
+			"rb\\",
+			"rb",
+			"ddmenu ",
+			"b",
+			"ddmenu",
+			"onkeydown",
+			"datePickers",
+			"setReservationDates",
+			"registerHere",
+			"#registerHere",
+			"date",
+			"$num",
+			"selectday",
+			"setdate",
+			"date3",
+			"room_no",
+			"$room_type",
+			"right",
+			");\n",
+			"query",
+			"row",
+			"form",
+			"fieldset",
+			"</form>",
+			"</div>",
+			"$sql",
+			"table",
+			"}\n",
+			"writescript",
+			"tc",
+			"writeScript()",
+			"writescript",
+			";\n",
+			"label",
+			"50",
+			"800px"
+		],
+		"highlight": false,
+		"in_selection": true,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": true,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "db_con.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 434,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								400,
+								400
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "test.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12114,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "test.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\xampp\\htdocs\\hotel_sys\\admin\\service.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 139.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
