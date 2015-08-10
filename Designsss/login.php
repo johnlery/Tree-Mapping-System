@@ -3,7 +3,7 @@
 	$error=''; // Variable To Store Error Message
 	if (isset($_POST['submit'])) {
 		if (empty($_POST['username']) || empty($_POST['password'])) {
-			$error = "Username or Password is invalid";
+			$error = "Must fill up Username and/or Password!";
 		}
 	else if(isset($_POST['username'])&&isset($_POST['password']))
 	{ 
@@ -20,7 +20,7 @@
 		// Selecting Database
 		$db = mysql_select_db("db_mapping", $connection);
 		// SQL query to fetch information of registerd users and finds user match.
-		$query = mysql_query("select * from tbl_admin where password='$password' AND username='$username'", $connection);
+		$query = mysql_query("SELECT * FROM tbl_admin WHERE password='$password' AND username='$username'", $connection);
 		$rows = mysql_num_rows($query);
 
 		//echo $rows;

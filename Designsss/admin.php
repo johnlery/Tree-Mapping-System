@@ -64,11 +64,16 @@ header("location: index.php");
       }
      
    </style>
-
+<!--- Adding Admin-->
    <?php if (isset($_POST['username'])&&isset($_POST['password'])) {
 
   $username = $_POST['username'];
   $password = $_POST['password'];
+  // Prevention of SQL Injection
+  $username = stripslashes($username);
+  $password = stripslashes($password);
+  $username = mysql_real_escape_string($username);
+  $password = mysql_real_escape_string($password);
 
   $query = "SELECT * FROM tbl_admin WHERE username = '$username' OR password = '$password' ";
   $result = mysql_query($query);
@@ -76,8 +81,8 @@ header("location: index.php");
     die("Could not connect to database!").mysql_error();
   }
   $num = mysql_num_rows($result);
-  if ($num > 0 ) {
-    
+
+  if ($num > 0 ) { 
     ?>
       <script type="text/javascript">
       alert("Username and/or Password is already existing");
@@ -86,6 +91,7 @@ header("location: index.php");
       <?php
       //header("location:profile.php#add-admin");
   }
+
   else{
     $query = "INSERT INTO `tbl_admin` (username,password) VALUES ('$username','$password')";
     $result = mysql_query($query);
@@ -103,7 +109,8 @@ header("location: index.php");
   }
 
   }
-
+// End of adding Admin
+// Add Tree
 $tree = null;
   if (isset($_POST['color'])&&isset($_POST['tree'])) {
 
@@ -148,12 +155,13 @@ $tree = null;
             }
         }
   }
+// End Add Tree
 ?>
   <!-- script for google map -->
   <script src="http://maps.google.com/maps/api/js?sensor=true&libraries=drawing,geometry&v=3.exp&signed_in=true"></script>
   <!-- javascript for the controls and everything about the map -->
   <script>
-          function initialize(){
+  function initialize(){
              //alert("ASDASD");
             var mapOption = {
               zoom: 10,
@@ -207,9 +215,9 @@ $tree = null;
         }
         ?>
 
-        }
+} //End function initialize()
 
-          google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     <style type="text/css">
       #map, html, body {
@@ -236,8 +244,14 @@ $tree = null;
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                 <!-- <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>-->
-                  <span class="hidden-xs"><?php echo $user ; ?></span>
+                <div class="row">
+                  <div class="col-md-6">
+                    <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                  </div>
+                  <div class="col-md-1">  
+                    <span class="hidden-xs"><?php echo $user ; ?></span>
+                  <div class="col-md-6">
+                </div>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
